@@ -2,6 +2,10 @@ const User = require('../models/user');
 
 const userCtrl = {};
 
+userCtrl.login = async (req, res) => {
+    //Metodo para el login
+}
+
 userCtrl.getUsers = async (req, res) => {
     const users = await User.find();
     res.json(users);
