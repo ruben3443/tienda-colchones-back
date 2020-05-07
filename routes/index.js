@@ -9,7 +9,7 @@ var router = express.Router();
 const product = require('../controllers/products.controller');
 const user = require('../controllers/users.controller');
 
-router.get('/login', user.login);
+router.post('/login', user.login);
 /* GET users listing. */
 router.get('/', product.getAllProducts);
 

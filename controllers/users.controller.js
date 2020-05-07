@@ -3,7 +3,10 @@ const User = require('../models/user');
 const userCtrl = {};
 
 userCtrl.login = async (req, res) => {
-    //Metodo para el login
+    res.json({
+        "status": "Han llegado los datos",
+        "data": req.body
+    });
 }
 
 userCtrl.getUsers = async (req, res) => {
