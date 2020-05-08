@@ -9,18 +9,18 @@ var router = express.Router();
 const product = require('../controllers/products.controller');
 const user = require('../controllers/users.controller');
 
-router.post('/login', user.login);
+router.post('/user/login', user.login);
 /* GET users listing. */
-router.get('/', product.getAllProducts);
+router.get('', product.getAllProducts);
 
-router.get('/:type', product.getProducts);
+router.get('/products/:type', product.getProducts);
 
-router.post('/:type', product.createProduct);
+router.post('/products/:type', product.createProduct);
 
-router.get('/:type/:id', product.getProduct);
+router.get('/products/:type/:id', product.getProduct);
 
-router.put('/:type/:id', product.editProduct);
+router.put('/products/:type/:id', product.editProduct);
 
-router.delete('/:type/:id', product.deleteProduct);
+router.delete('/products/:type/:id', product.deleteProduct);
 
 module.exports = router;
