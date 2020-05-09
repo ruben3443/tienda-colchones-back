@@ -23,10 +23,7 @@ productCtrl.createProduct = async (req, res) => {
         discount: req.body.discount
     });
     await product.save();
-    res.json({
-        "status": "Producto guardado",
-        "data": product
-    });
+    res.json(product);
 }
 
 productCtrl.getProduct = async (req, res) => {
@@ -46,18 +43,12 @@ productCtrl.editProduct = async (req, res) => {
         discount: req.body.discount
     };
     await Product.findByIdAndUpdate(id, {$set: product}, {new: true});
-    res.json({
-        "status": "Producto actualizado",
-        "data": product
-    });
+    res.json(product);
 }
 
 productCtrl.deleteProduct = async (req, res) => {
     await Product.findByIdAndRemove(req.params.id);
-    res.json({
-        "status": "Producto eliminado",
-        "id": req.params.id
-    });
+    res.json(req.params.id);
 }
 
 module.exports = productCtrl;
