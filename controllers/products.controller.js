@@ -20,7 +20,8 @@ productCtrl.createProduct = async (req, res) => {
         price: req.body.price,
         units: req.body.units,
         important: req.body.important,
-        discount: req.body.discount
+        discount: req.body.discount,
+        imgPath: req.body.imgPath
     });
     await product.save();
     res.json(product);
@@ -40,7 +41,8 @@ productCtrl.editProduct = async (req, res) => {
         price: req.body.price,
         units: req.body.units,
         important: req.body.important,
-        discount: req.body.discount
+        discount: req.body.discount,
+        imgPath: req.body.imgPath
     };
     await Product.findByIdAndUpdate(id, {$set: product}, {new: true});
     res.json(product);

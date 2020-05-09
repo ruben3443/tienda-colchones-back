@@ -8,7 +8,8 @@ const ProductScheema = new Schema({
     price: {type: Number, required: true},
     units: {type: Number, required: true},
     important: {type: Boolean, require: true},
-    discount: {type: Number, require: true}
+    discount: {type: Number, require: true},
+    imgPath: {type: String, require: true}
 });
 
 module.exports = mongoose.model('Product', ProductScheema);

@@ -106,4 +106,22 @@ userCtrl.deleteUser = async (req, res) => {
     });
 }
 
+userCtrl.verifyToken = async (req, res, next) => {
+    
+    const token = req.headers['authorization'];
+    
+    if(token){
+        jwt.verify(token, SECRET_KEY, (err, decoded) => {      
+          if (err) {
+            return res.json({mensaje: 'Token inválido.'});    
+          } else {
+            req.decoded = decoded;    
+            next();
+          }
+        });
+      } else {
+        res.send({mensaje: 'Debe identificarse con un token.'});
+    }
+}
+
 module.exports = userCtrl;

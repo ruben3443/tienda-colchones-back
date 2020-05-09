@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/imgs', express.static('public/stylesheets/imgs'));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
