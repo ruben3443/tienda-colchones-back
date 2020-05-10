@@ -13,7 +13,9 @@ const user = require('../controllers/users.controller');
 
 router.post('/user/login', user.login);
 /* GET users listing. */
-router.get('', product.getAllProducts);
+router.get('', product.getImportantProducts);
+
+router.get('/all', product.getAllProducts);
 
 router.get('/products/:type', product.getProducts);
 

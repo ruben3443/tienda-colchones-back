@@ -124,4 +124,37 @@ userCtrl.verifyToken = async (req, res, next) => {
     }
 }
 
+userCtrl.checkUsers =  async () => {
+    const users_number = (await User.find()).length;
+    if(users_number == 0){
+        userCtrl.createFirstUsers();
+        console.log("Se han creado usuarios iniciales");
+    }
+}
+
+userCtrl.createFirstUsers =  async () => {
+
+    //Usuario admin
+    const user_admin = new User({
+        name: "Admin",
+        password: bcrypt.hashSync("password", 10),
+        type: 0,
+        email: "correo_admin@gmail.com",
+        user_name: "admin1234",
+        status: "ok"
+    });
+    await user_admin.save();
+
+    //Usuario normal
+    const user_normal = new User({
+        name: "Pepe",
+        password: bcrypt.hashSync("password", 10),
+        type: 1,
+        email: "correo_pepe@gmail.com",
+        user_name: "pepe1234",
+        status: "ok"
+    });
+    await user_normal.save();
+}
+
 module.exports = userCtrl;
