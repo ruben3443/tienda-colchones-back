@@ -21,25 +21,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(cors({origin: 'http://localhost:4200/'}));
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-//   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-//   res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-//   next();
-// });
-// app.use(function (req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-//   res.setHeader('Access-Control-Allow-Credentials', true);
-//   next();
-// });
+
+// provides CORS controll
 app.use(cors());
+
+// Asigns first part of URL to routers modules
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// creates static URL to access imgs 
 app.use('/imgs', express.static('public/stylesheets/imgs'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

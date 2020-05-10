@@ -2,17 +2,34 @@ var express = require('express');
 var router = express.Router();
 const userCtrl = require('../controllers/users.controller');
 
-const user = require('../controllers/users.controller');
+/** 
+* GET endpoint to get all users
+* Needs authorization
+*/
+router.get('/', userCtrl.verifyToken, userCtrl.getUsers);
 
-/* GET users listing. */
-router.get('/', userCtrl.verifyToken, user.getUsers);
+/** 
+* POST endpoint to create user
+* Needs authorization
+*/
+router.post('/', userCtrl.verifyToken, userCtrl.createUsers);
 
-router.post('/', userCtrl.verifyToken, user.createUsers);
+/** 
+* GET endpoint to get all users
+* Needs authorization
+*/
+router.get('/:id', userCtrl.verifyToken, userCtrl.getUser);
 
-router.get('/:id', userCtrl.verifyToken, user.getUser);
+/** 
+* PUT endpoint to modify user
+* Needs authorization
+*/
+router.put('/:id', userCtrl.verifyToken, userCtrl.editUser);
 
-router.put('/:id', userCtrl.verifyToken, user.editUser);
-
-router.delete('/:id', userCtrl.verifyToken, user.deleteUser);
+/** 
+* DELETE endpoint to delete user
+* Needs authorization
+*/
+router.delete('/:id', userCtrl.verifyToken, userCtrl.deleteUser);
 
 module.exports = router;

@@ -2,21 +2,50 @@ const Product = require('../models/product');
 
 const productCtrl = {};
 
+/**
+ * Method that will get all the important products (products with important set to true)
+ * Return all products with all params
+ */
 productCtrl.getImportantProducts = async (req, res) => {
     const products = await Product.find({important: true}) // .select('name -_id'); El menos es para eliminar el campo (el id siempre aparece)
     res.json(products);
 }
 
+/**
+ * Method that will get all the important products
+ * Return all products with all params
+ */
 productCtrl.getAllProducts = async (req, res) => {
     const products = await Product.find() // .select('name -_id'); El menos es para eliminar el campo (el id siempre aparece)
     res.json(products);
 }
 
+/**
+ * Method that will get products by the specified type
+ * Params (body) {
+ *       type: string,
+ * }
+ * Return all products with all params
+ */
 productCtrl.getProducts = async (req, res) => {
     const products = await Product.find({type: req.params.type}) // .select('name -_id'); El menos es para eliminar el campo (el id siempre aparece)
     res.json(products);
 }
 
+/**
+ * Method to create a product
+ * Params (body) {
+ *       name: string,
+ *       description: string,
+ *       type: string,
+ *       price: number,
+ *       units: number,
+ *       important: boolean,
+ *       discount: number,
+ *       imgPath: string
+ * }
+ * Return the product object without the _id
+ */
 productCtrl.createProduct = async (req, res) => {
     const product = new Product({
         name: req.body.name,
@@ -32,11 +61,35 @@ productCtrl.createProduct = async (req, res) => {
     res.json(product);
 }
 
+/**
+ * Method to get a product by its ID
+ * Params (params) {
+ *       id: string,
+ * }
+ * Return the product with all params
+ */
 productCtrl.getProduct = async (req, res) => {
     const products = await Product.findById(req.params.id);
     res.json(products);
 }
 
+/**
+ * Method to update products params. Searched by ID
+ * Params (body) {
+ *       name: string,
+ *       description: string,
+ *       type: string,
+ *       price: number,
+ *       units: number,
+ *       important: boolean,
+ *       discount: number,
+ *       imgPath: string
+ * },
+ *  (params) {
+ *       id: string,
+ * }
+ * Return the product object without the _id
+ */
 productCtrl.editProduct = async (req, res) => {
     const { id } = req.params;
     const product = {
@@ -53,11 +106,21 @@ productCtrl.editProduct = async (req, res) => {
     res.json(product);
 }
 
+/**
+ * Method to delete product by ID
+ * Params (params) {
+ *       id: string,
+ * }
+ * Return products id
+ */
 productCtrl.deleteProduct = async (req, res) => {
     await Product.findByIdAndRemove(req.params.id);
     res.json(req.params.id);
 }
 
+/**
+ * Method to verify if the db has products
+ */
 productCtrl.checkProducts =  async () => {
     const products_number = (await Product.find()).length;
     if(products_number == 0){
@@ -66,6 +129,9 @@ productCtrl.checkProducts =  async () => {
     }
 }
 
+/**
+ * Method to create initial products when db is empty
+ */
 productCtrl.createFirstProducts =  async () => {
     const product_1 = new Product({
         name: "Nombre del colchón 1",
